@@ -25,7 +25,7 @@ import com.Greenness.GreenApp.model.tabTwoDataClass;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://greeitam.vercel.app/")
 public class MainController {
 	
 	@Autowired
