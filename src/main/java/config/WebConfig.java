@@ -1,20 +1,26 @@
 package config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig {
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        // Forward all routes except those containing a dot (e.g., .js, .css, .png)
-        // and except API routes
-        registry.addViewController("/{path:^(?!api$).*$}")
-                .setViewName("forward:/index.html");
-        registry.addViewController("/**/{path:^(?!api$).*$}")
-                .setViewName("forward:/index.html");
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/api/**")  // adjust path pattern if needed
+                        .allowedOrigins("https://greeitam.vercel.app")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
+            }
+        };
     }
 }
