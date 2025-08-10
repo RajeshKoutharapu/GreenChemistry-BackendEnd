@@ -25,7 +25,7 @@ import com.Greenness.GreenApp.model.tabTwoDataClass;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://greeitam.vercel.app/")
+@CrossOrigin(origins = "https://greeitam.vercel.app")
 public class MainController {
 	
 	@Autowired
@@ -44,14 +44,21 @@ public class MainController {
 	public void tab1(@RequestBody tabOneDataClass tabonedata) {
 
         tab1service.Tab1DataService(tabonedata);
+        System.out.println("TAB one Data recived");
 		
 	}
 	 @PostMapping("/tab2-data")
-	 public void tab2(@RequestBody tabTwoDataClass tabtwodata) {
-		 
-		 tab2service.tab2DateService(tabtwodata);
+	 public ResponseEntity<String> tab2(@RequestBody tabTwoDataClass tabtwodata) {
+	     try {
+	         tab2service.tab2DateService(tabtwodata);
+	         return ResponseEntity.ok("Tab2 data processed successfully");
+	     } catch (Exception e) {
+	         e.printStackTrace();
+	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                              .body("Error processing Tab2 data: " + e.getMessage());
+	     }
 	 }
-	 
+
 	 @PostMapping("/tab3-data")
 	 public void tab3(@RequestBody tabThreeDataClass tabthreedata) {
 		
