@@ -1,6 +1,7 @@
 package com.Greenness.GreenApp.Service.Tab3Services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,10 +58,10 @@ public class noOfGasesService {
 		//we are using clear method for crearing previous request data for avoiding error called adding data angain instead of replacing with new requesting data
        totalwaste=0D;
        gasesnfpahealthvalueAverage=0D;
-       nfpahealthvalue.clear();
-       volumeofgaslist.clear();
-       gasedusedlist.clear();
-       
+//       nfpahealthvalue.clear();
+//       volumeofgaslist.clear();
+//       gasedusedlist.clear();
+       System.out.println(nfpahealthvalue);
 		
 	Double timeandinjectionsproduct=maininstrumentservice.getProductOfTimeAndInjections();
 	        //method call for adding volume of gas to list
@@ -118,12 +119,14 @@ public class noOfGasesService {
             //adding total volume of gas to the list one by one for caliculation of step2
 		  temp.add(timeandinjectionsproduct*Double.parseDouble(nfpahealthvalue.get(i).get(2)));  
 		}
+		System.out.println(Arrays.toString(temp.toArray()));
 		return temp;
 	}
 	
 	public Double getTotalWaste(List<Double> totalvoluemgaselist,Integer noofannalytic) {
 		
 		//getting waste from tab1 and tab2
+		
 		Double tab1waste=tab1service.getWasteVolume();
 		Double tab2waste=tab2service.getEfluentWaste();
 		//adding both to final waste
@@ -144,6 +147,7 @@ public class noOfGasesService {
 			temp.add((gaslist*100)/totalwaste);
 		}
 		
+		System.out.println(Arrays.toString(temp.toArray()));
 		return temp;
 	}
 	

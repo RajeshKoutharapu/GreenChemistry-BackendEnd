@@ -21,7 +21,7 @@ public class mainInstrumentsService {
         maininstrumentsmap.put("Raman Spectrometer", 0.01);
         maininstrumentsmap.put("HPLC", 0.2);
         maininstrumentsmap.put("UHPLC (UPLC)", 0.2);
-        maininstrumentsmap.put("GC/MSD", 0.7);
+        maininstrumentsmap.put("GC-MS", 0.7);
         maininstrumentsmap.put("Triple Quadrupole GC/MS", 0.7);
         maininstrumentsmap.put("LC-MS", 0.8);
         maininstrumentsmap.put("GC", 0.4);
@@ -52,13 +52,14 @@ public class mainInstrumentsService {
 	  Double energysum=0D;
 	  Double time=0D;
 	  Double noofinjections=0D;
-	
+	  noofinjectionandruntimefortab3=0D;
+	  averageoflengthcolumnsampletemperatures=0D;
 	  
 	  if(maininstrumentdata.size()>0) {
 		  for (MainInstrument mainInstrumenttemp : maininstrumentdata) {
 			  
 			  //this conditions saparate the operation condition based on give prototype
-			 if(mainInstrumenttemp.getInstrumentName().equals("HPLC") || mainInstrumenttemp.getInstrumentName().equals("UHPLC") || mainInstrumenttemp.getInstrumentName().equals("UPLC") || mainInstrumenttemp.getInstrumentName().equals("LC-MS") || mainInstrumenttemp.getInstrumentName().equals("GC") || mainInstrumenttemp.getInstrumentName().equals("LC-MS")) {
+			 if(mainInstrumenttemp.getInstrumentName().equals("HPLC") || mainInstrumenttemp.getInstrumentName().equals("UHPLC") || mainInstrumenttemp.getInstrumentName().equals("UPLC") || mainInstrumenttemp.getInstrumentName().equals("LC-MS") || mainInstrumenttemp.getInstrumentName().equals("GC") || mainInstrumenttemp.getInstrumentName().equals("GC-MS")) {
 				  energy=maininstrumentsmap.get(mainInstrumenttemp.getInstrumentName());
 				  if(energy==null)
 					   energy=1.0;
@@ -116,10 +117,10 @@ public class mainInstrumentsService {
 			 } 
 			 else if(mainInstrumenttemp.getInstrumentName().equals("Dissolution") ){
 				 energy=maininstrumentsmap.get(mainInstrumenttemp.getInstrumentName());
-				 time=mainInstrumenttemp.getOperatingConditions().get("Time in minsn");
+				 time=mainInstrumenttemp.getOperatingConditions().get("Time in mins");
 				 energysum+=(energy*time)/60;
 				 
-			 }
+			 } 
 			 else if(mainInstrumenttemp.getInstrumentName().equals("NMR") || mainInstrumenttemp.getInstrumentName().equals("UV-Vis Spectrophotometer") || mainInstrumenttemp.getInstrumentName().equals("FT-IR")) {
 				 energy=maininstrumentsmap.get(mainInstrumenttemp.getInstrumentName());
 				 time=mainInstrumenttemp.getOperatingConditions().get("scan_time");
@@ -127,6 +128,12 @@ public class mainInstrumentsService {
 				  energysum+=(energy*time*noofinjections)/60;
 
 				 
+			 }
+			 else if(mainInstrumenttemp.getInstrumentName().equals("Other Instrument")) {
+				 energy=mainInstrumenttemp.getOperatingConditions().get("energy_kwh");
+				 time=mainInstrumenttemp.getOperatingConditions().get("time_for_study");
+				 noofinjections=mainInstrumenttemp.getOperatingConditions().get("num_samples_studied");
+				 energysum+=(energy*time*noofinjections)/60;
 			 }
 			 else {
 				 energy=maininstrumentsmap.get(mainInstrumenttemp.getInstrumentName());

@@ -81,9 +81,14 @@ public class generalInstrumentsService {
 		  
 		if(generalinstrument.size()>0) {
 			for (GeneralInstrument generalInstrumenttemp : generalinstrument) {
-				
-			Double energy=generalinstrumentmap.get(generalInstrumenttemp.getInstrument());
-			totalenergy+=(energy*generalInstrumenttemp.getTime())/60;
+				//this condition is for caliculating for if any other instumenst enter in general instruments 
+			if(generalInstrumenttemp.getInstrument().equals("Other Instrument")) {
+			   totalenergy+=(generalInstrumenttemp.getEnergy_kwh()*generalInstrumenttemp.getTime())/60;
+			}else {
+				Double energy=generalinstrumentmap.get(generalInstrumenttemp.getInstrument());
+				totalenergy+=(energy*generalInstrumenttemp.getTime())/60;
+			}
+			
 				
 			}
 		}

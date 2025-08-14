@@ -16,7 +16,8 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")  // adjust path pattern if needed
-                        .allowedOrigins("https://greetiam.netlify.app")
+//                        .allowedOrigins("https://greetiam.netlify.app")
+                        .allowedOrigins("http://localhost:3000")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);

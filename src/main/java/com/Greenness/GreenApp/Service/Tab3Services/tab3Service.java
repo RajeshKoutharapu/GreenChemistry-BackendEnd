@@ -55,6 +55,9 @@ public class tab3Service {
          
 		
 		//function call for finding the gasesnfpshealthaverage 
+         System.out.println(tabthreedataforgasesclac.getNumberOfGases().getNfpaHealthValue());
+
+ 		System.out.println(tabthreedataforgasesclac.getNumberOfGases().getNfpaFlammabilityValue());
 		gasesnfpahealthaverage=gasesservices.getGasesNfpahealthAndFlemmabilityAverage(tabthreedataforgasesclac.getNumberOfGases().getNfpaHealthValue(),noofanalyticsstudied);
 		System.out.println("gasesnfpahealth average :"+gasesnfpahealthaverage);
 		

@@ -86,6 +86,7 @@ public class tab4Service {
     
     //Method for Services Related to tab 4 
     public void getTab4Data(tabFourDataClass tabfourdata) {
+    	Result=0;
     	numberofanalytes=tabfourdata.getNumAnalytes();
     	insitu=insamplewastesamlemap.get(tabfourdata.getInstrumentPosi());
     	instrumentposition=tabfourdata.getInstrumentPosi();//this is used in final report generation

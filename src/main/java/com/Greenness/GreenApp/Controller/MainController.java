@@ -26,6 +26,7 @@ import com.Greenness.GreenApp.model.tabTwoDataClass;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "https://greetiam.netlify.app")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class MainController {
 	
 	@Autowired
@@ -38,7 +39,8 @@ public class MainController {
 	tab4Service tab4service;
 	@Autowired
 	finalReportService finalreportservice;
-
+    
+	tabThreeDataClass tabthreeclearing;
 
 	 @PostMapping("/tab1-data")
 	public void tab1(@RequestBody tabOneDataClass tabonedata) {
@@ -51,6 +53,8 @@ public class MainController {
 	 public ResponseEntity<String> tab2(@RequestBody tabTwoDataClass tabtwodata) {
 	     try {
 	         tab2service.tab2DateService(tabtwodata);
+	         //assing null to tab3dat class because to avoid redending dta if request from tab 3
+	         tabthreeclearing=null;
 	         return ResponseEntity.ok("Tab2 data processed successfully");
 	     } catch (Exception e) {
 	         e.printStackTrace();
@@ -63,8 +67,9 @@ public class MainController {
 	 public void tab3(@RequestBody tabThreeDataClass tabthreedata) {
 		
 		try {
-		
+			
 		tab3Service.getTab3Services(tabthreedata);
+		
 		}
 		catch (Exception e) {
 			// TODO: handle exception

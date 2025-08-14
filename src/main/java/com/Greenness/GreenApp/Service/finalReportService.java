@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Greenness.GreenApp.Service.Tab2Services.tab2Service;
+import com.Greenness.GreenApp.model.tabThreeDataClass;
 
 
 
@@ -23,7 +24,7 @@ public class finalReportService {
     @Autowired
     preReportResultsService prereportresult;
     
-    
+   
 	Map<String,String> finalreportmwmbersmap=new HashMap<>();
 	
 	public Map<String,String> getResponseData(){
@@ -63,7 +64,7 @@ public class finalReportService {
      else
     	 finalreportmwmbersmap.put("finalResult","Non Green");
 
-
+        
      System.out.println(finalreportmwmbersmap);
 		return finalreportmwmbersmap;
 	}

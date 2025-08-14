@@ -78,7 +78,7 @@ public class Tab1Service {
 		  }
 		 }
 		 Integer temp=standard.size()+resolution.size()+sample.size();
-		  Double avg=filtartionsum/temp;
+		  Double avg=Math.round(filtartionsum/temp* 10.0) / 10.0;
 		  
 		  
 		  //adding filtration average to map
