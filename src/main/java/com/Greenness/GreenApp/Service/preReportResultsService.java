@@ -50,7 +50,7 @@ public class preReportResultsService {
 		
 	}
 	
-	public void setHazardusChemicalResult(Integer chealthavg,Integer cflemmabilityavg, Integer ghealthavg,Integer gflemmabilityavg ) {
+	public void setHazardusChemicalResult(Integer chealthavg,Integer cflemmabilityavg, Integer ghealthavg,Integer gflemmabilityavg) {
 		  hazarduschemicalresult=Math.round( (chealthavg+cflemmabilityavg+ghealthavg+gflemmabilityavg)/4);
 		  System.out.println("hazarduschemicalresult :"+hazarduschemicalresult);
 	}

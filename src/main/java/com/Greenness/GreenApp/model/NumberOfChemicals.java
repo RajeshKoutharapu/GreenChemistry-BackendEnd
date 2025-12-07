@@ -3,6 +3,8 @@ package com.Greenness.GreenApp.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+@Component
 public class NumberOfChemicals {
 
     @JsonProperty("NfpaHealthValue")

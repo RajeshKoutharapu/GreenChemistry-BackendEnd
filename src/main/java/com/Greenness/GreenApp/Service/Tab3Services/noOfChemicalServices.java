@@ -61,7 +61,7 @@ public class noOfChemicalServices {
 
 	}
 	public Double getChemicalPhysicalHazardAverage(List<List<String>> physicalhazardvalue) {
-		 Integer phsum=0;
+		 Integer phsum=0;   
 		Integer swsum=0;
 		Double phaverage=0D,swaverage=0D;
 		for(int i=0;i<physicalhazardvalue.size();i++) {

@@ -61,7 +61,7 @@ public class noOfGasesService {
 //       nfpahealthvalue.clear();
 //       volumeofgaslist.clear();
 //       gasedusedlist.clear();
-       System.out.println(nfpahealthvalue);
+       System.out.println("nfpa health value"+nfpahealthvalue);
 		
 	Double timeandinjectionsproduct=maininstrumentservice.getProductOfTimeAndInjections();
 	        //method call for adding volume of gas to list
@@ -71,7 +71,7 @@ public class noOfGasesService {
 						}
 	       //method call for getting total waste
 	       totalwaste=getTotalWaste(volumeofgaslist ,noofanayticsstyied);
-	                // System.out.println(totalwaste);
+	                System.out.println("total waste "+totalwaste);
 	       //method call to find percentage of gases used (step2)
 	       gasedusedlist=step2(volumeofgaslist,totalwaste);
 					//	       for (Double list : gasedusedlist) {
@@ -107,6 +107,8 @@ public class noOfGasesService {
 		 swaverage=(double) (swsum/physicalhazardvalue.size());
 		
 		}
+	//	System.out.println("signalword avg :"+swaverage+"  "+(phaverage+swaverage)/2);
+		
 		return (phaverage+swaverage)/2;
 
 	}
@@ -119,7 +121,7 @@ public class noOfGasesService {
             //adding total volume of gas to the list one by one for caliculation of step2
 		  temp.add(timeandinjectionsproduct*Double.parseDouble(nfpahealthvalue.get(i).get(2)));  
 		}
-		System.out.println(Arrays.toString(temp.toArray()));
+		System.out.println("step 1 res "+Arrays.toString(temp.toArray()));
 		return temp;
 	}
 	
@@ -129,15 +131,16 @@ public class noOfGasesService {
 		
 		Double tab1waste=tab1service.getWasteVolume();
 		Double tab2waste=tab2service.getEfluentWaste();
+		System.out.println("tab1 wastes"+tab1service.getWasteVolume()+" "+tab2service.getEfluentWaste());
 		//adding both to final waste
 		Double finalwaste=tab1waste+tab2waste;
 		for (Double temp : totalvoluemgaselist) {
 			//adding gasvolume to final waste
 			finalwaste+=temp;
 		}
+
 		
-		
-		return finalwaste/noofannalytic;
+		return finalwaste;
 		
 	}
 	public List<Double> step2(List<Double> gasvolumelist,Double totalwaste){
@@ -147,7 +150,7 @@ public class noOfGasesService {
 			temp.add((gaslist*100)/totalwaste);
 		}
 		
-		System.out.println(Arrays.toString(temp.toArray()));
+		System.out.println("step 2 result"+Arrays.toString(temp.toArray()));
 		return temp;
 	}
 	

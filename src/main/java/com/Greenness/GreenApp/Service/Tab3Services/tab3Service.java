@@ -58,8 +58,19 @@ public class tab3Service {
          System.out.println(tabthreedataforgasesclac.getNumberOfGases().getNfpaHealthValue());
 
  		System.out.println(tabthreedataforgasesclac.getNumberOfGases().getNfpaFlammabilityValue());
-		gasesnfpahealthaverage=gasesservices.getGasesNfpahealthAndFlemmabilityAverage(tabthreedataforgasesclac.getNumberOfGases().getNfpaHealthValue(),noofanalyticsstudied);
-		System.out.println("gasesnfpahealth average :"+gasesnfpahealthaverage);
+		
+ 	gasesnfpahealthaverage=gasesservices.getGasesNfpahealthAndFlemmabilityAverage(tabthreedataforgasesclac.getNumberOfGases().getNfpaHealthValue(),noofanalyticsstudied);
+	
+// 	 if(gasesnfpahealthaverage>=250)
+// 		gasesnfpahealthaverage=0;
+// 	 else if(gasesnfpahealthaverage>=150)
+// 		gasesnfpahealthaverage=25;
+// 	 else if(gasesnfpahealthaverage<=100)
+// 		gasesnfpahealthaverage=75;
+// 	 else
+// 		gasesnfpahealthaverage=100;
+ 	
+ 	System.out.println("gasesnfpahealth average :"+gasesnfpahealthaverage);
 		
 		//this bellow code represents getting nfpahealthvaluelist(used to calicilate total waste generated) from step1 in calicilation of nfpahealthvalu average 
 		Double timeandinjectionsproduct=maininstrumentservice.getProductOfTimeAndInjections();
