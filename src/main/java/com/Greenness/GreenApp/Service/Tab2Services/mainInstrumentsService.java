@@ -12,6 +12,7 @@ import com.Greenness.GreenApp.model.MainInstrument;
 public class mainInstrumentsService {
 	
 	 Map<String, Double> maininstrumentsmap = new HashMap<>();
+	  //Double RuntimeAndSamples=0D;
 	  Double noofinjectionandruntimefortab3=0D;
 	  //this variable is used to hold the average of main intruments conditions used to calculate miniaptherization result
 	  Double averageoflengthcolumnsampletemperatures=0D;
@@ -92,29 +93,89 @@ public class mainInstrumentsService {
 				   
 				   Double colomntemperature=mainInstrumenttemp.getOperatingConditions().get("column_temp");
 				   
-				   if(colomntemperature>=50)
+				   if(colomntemperature>=50 || colomntemperature<=5)
 					   manuscriptcolomntemp=0;
-				   else if(colomntemperature>=40)
-					   manuscriptcolomntemp=25;
-				   else if(colomntemperature>=30)
-					   manuscriptcolomntemp=50;
+				   else if(colomntemperature>=40 || colomntemperature<=10)
+					   manuscriptcolomntemp=33;
+				   else if(colomntemperature>=30 || colomntemperature<=15)
+					   manuscriptcolomntemp=66;
 				   else
-					   manuscriptcolomntemp=75;
+					   manuscriptcolomntemp=66;
 				   
 				   Double sampletemparature= mainInstrumenttemp.getOperatingConditions().get("sample_temp");
                   
                     if(sampletemparature<=5)
                     	manuscriptsampletemp=0;
                     else if(sampletemparature<=10)
-                    	manuscriptsampletemp=25;
+                    	manuscriptsampletemp=33;
                     else if(sampletemparature<=15)
-                    	manuscriptsampletemp=50;
+                    	manuscriptsampletemp=66;
                     else
-                    	manuscriptsampletemp=75;
+                    	manuscriptsampletemp=100;
 				  
                     averageoflengthcolumnsampletemperatures+=(manuscriptcolomnlegth+manuscriptcolomntemp+manuscriptsampletemp)/3;
 				  
-			 } 
+			 }
+			 else if(mainInstrumenttemp.getInstrumentName().equals("GC") || mainInstrumenttemp.getInstrumentName().equals("GC-MS")||
+					 mainInstrumenttemp.getInstrumentName().equals("Single Quadrupole GC-MS") || mainInstrumenttemp.getInstrumentName().equals("Triple Quadrupole GC/MS")) {
+				 
+				 energy=maininstrumentsmap.get(mainInstrumenttemp.getInstrumentName());
+				  if(energy==null)
+					   energy=1.0;
+				 time=mainInstrumenttemp.getOperatingConditions().get("run_time");
+				  noofinjections=mainInstrumenttemp.getOperatingConditions().get("num_injections");
+				  energysum+=(energy*time*noofinjections)/60;
+				  noofinjectionandruntimefortab3+=time*noofinjections;
+				  
+				  
+				  //bellow code is resposible for getting the values for caliculation of miniaothorization final result which is in tab2 but accissing in tab4 
+				  
+				           mainInstrumenttemp.getOperatingConditions().get("sample_temp");
+				 
+				  //Assigning the respeceted values for colomn length,sample and colmn teperatures based on the manuscript point number7
+				  Integer manuscriptcolomnlegth=0;
+				  Integer manuscriptcolomntemp=0;
+				  Integer manuscriptsampletemp=0;
+				  Double colomnlength=mainInstrumenttemp.getOperatingConditions().get("column_length");
+				   
+				   if(colomnlength>=60)
+					   manuscriptcolomnlegth=0;
+				   else if(colomnlength<=5)
+					   manuscriptcolomnlegth=100;
+				   else if(colomnlength<=10)
+					   manuscriptcolomnlegth=75;
+				   else if(colomnlength<=15)
+					   manuscriptcolomnlegth=50;
+				   else
+					   manuscriptcolomnlegth=25;
+				   
+				   Double colomntemperature=mainInstrumenttemp.getOperatingConditions().get("column_temp");
+				   
+				   if(colomntemperature>=50 || colomntemperature<=5)
+					   manuscriptcolomntemp=0;
+				   else if(colomntemperature>=40 || colomntemperature<=10)
+					   manuscriptcolomntemp=33;
+				   else if(colomntemperature>=30 || colomntemperature<=15)
+					   manuscriptcolomntemp=66;
+				   else
+					   manuscriptcolomntemp=66;
+				   
+				   Double sampletemparature= mainInstrumenttemp.getOperatingConditions().get("sample_temp");
+                 
+                   if(sampletemparature>=250)
+                   	manuscriptsampletemp=0;
+                   else if(sampletemparature<=50)
+                   	manuscriptsampletemp=100;
+                   else if(sampletemparature<=100)
+                   	manuscriptsampletemp=75;
+                   else if(sampletemparature<=150)
+                   	manuscriptsampletemp=50;
+                   else
+                	   manuscriptsampletemp=25;
+				  
+                   averageoflengthcolumnsampletemperatures+=(manuscriptcolomnlegth+manuscriptcolomntemp+manuscriptsampletemp)/3;
+				 
+			 }
 			 else if(mainInstrumenttemp.getInstrumentName().equals("Dissolution") ){
 				 energy=maininstrumentsmap.get(mainInstrumenttemp.getInstrumentName());
 				 time=mainInstrumenttemp.getOperatingConditions().get("Time in mins");
@@ -134,12 +195,15 @@ public class mainInstrumentsService {
 				 time=mainInstrumenttemp.getOperatingConditions().get("time_for_study");
 				 noofinjections=mainInstrumenttemp.getOperatingConditions().get("num_samples_studied");
 				 energysum+=(energy*time*noofinjections)/60;
+				// noofinjectionandruntimefortab3+=time*noofinjections;
 			 }
 			 else {
 				 energy=maininstrumentsmap.get(mainInstrumenttemp.getInstrumentName());
 				 time=mainInstrumenttemp.getOperatingConditions().get("Time for of study");
 				  noofinjections=mainInstrumenttemp.getOperatingConditions().get("Number of samles studied");
 				  energysum+=(energy*time*noofinjections)/60;
+				  
+				  
 			 }
 		}
 	  }

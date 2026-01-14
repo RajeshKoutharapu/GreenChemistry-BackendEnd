@@ -28,10 +28,20 @@ public class preReportResultsService {
 	
 	//method that caliculate teh operation safty final result
 	public void getOperationSaftyFinalResult(Double chemicalphysicalhazardaverage,Double gasesphysicalhazardaverage) {
-		
+		if(chemicalphysicalhazardaverage == -1&&gasesphysicalhazardaverage == -1) {
+			 operationsaftyfinalresult=100;
+			 return;
+		}
+		else if(chemicalphysicalhazardaverage==-1) {
+			operationsaftyfinalresult= (int) Math.round(gasesphysicalhazardaverage);
+		}
+		else if(gasesphysicalhazardaverage==-1) {
+			operationsaftyfinalresult= (int) Math.round(chemicalphysicalhazardaverage);
+
+		}else {
 		operationsaftyfinalresult=(int) Math.round( ((chemicalphysicalhazardaverage+gasesphysicalhazardaverage)/2));
 		System.out.println("operationsaftyfinalresult :"+operationsaftyfinalresult);
-		
+		}
 	}
 	
 	//method used to set the instrument position based  value from tab4
@@ -51,8 +61,28 @@ public class preReportResultsService {
 	}
 	
 	public void setHazardusChemicalResult(Integer chealthavg,Integer cflemmabilityavg, Integer ghealthavg,Integer gflemmabilityavg) {
-		  hazarduschemicalresult=Math.round( (chealthavg+cflemmabilityavg+ghealthavg+gflemmabilityavg)/4);
-		  System.out.println("hazarduschemicalresult :"+hazarduschemicalresult);
+		
+		System.out.println(chealthavg+"   "+cflemmabilityavg+"   "+ghealthavg+"   "+gflemmabilityavg);
+		
+		
+		if(gflemmabilityavg!=-1 && chealthavg!=-1){
+			hazarduschemicalresult=Math.round( (ghealthavg+gflemmabilityavg+chealthavg+cflemmabilityavg)/4);
+			  System.out.println("hazarduschemicalresult :"+hazarduschemicalresult);
+		}
+		else if(gflemmabilityavg==-1 && chealthavg!=-1) {
+			 hazarduschemicalresult=Math.round( (chealthavg+cflemmabilityavg)/2);
+			  System.out.println("hazarduschemicalresult :"+hazarduschemicalresult);
+			}
+			else if(chealthavg==-1 && gflemmabilityavg!=-1) {
+				hazarduschemicalresult=Math.round( (ghealthavg+gflemmabilityavg)/2);
+				  System.out.println("hazarduschemicalresult :"+hazarduschemicalresult);
+			}
+		else
+		{
+			hazarduschemicalresult=100;
+			  System.out.println("hazarduschemicalresult :"+hazarduschemicalresult);
+		}
+		
 	}
 	
 	public void setDerivation(Integer derivationvalue) {

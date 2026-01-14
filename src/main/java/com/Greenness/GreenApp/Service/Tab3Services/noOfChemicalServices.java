@@ -39,6 +39,9 @@ public class noOfChemicalServices {
 	public Integer getChemicalNfpaHeathAverage( List<List<String>> healthvalue) {
 		//we are assigning 0 coz crearing previous request data for avoiding error called adding data angain instead of replacing with new requesting data
          healthtemp=0D;
+         //returning -1 for 0 chemicals
+         if(healthvalue.size()==0)
+        	  return -1;
 		
 		for(int i=0;i<healthvalue.size();i++) {
 			
@@ -52,7 +55,11 @@ public class noOfChemicalServices {
 	}
 	public Integer getChemicalNfpaFlemmabilityAverage(List<List<String>> flemmabilityvalue) {
 		//we are using clear method for crearing previous request data for avoiding error called adding data angain instead of replacing with new requesting data
-        flemmabilitytemp=0D;
+           
+		flemmabilitytemp=0D;
+		if(flemmabilityvalue.size()==0) {
+			return -1;
+		}
 		for(int i=0;i<flemmabilityvalue.size();i++) {
 			flemmabilitytemp+=(nfpahealtflemabilityhmap.get(flemmabilityvalue.get(i).get(1))*Double.parseDouble(flemmabilityvalue.get(i).get(2)))/100;
 		}
@@ -64,6 +71,10 @@ public class noOfChemicalServices {
 		 Integer phsum=0;   
 		Integer swsum=0;
 		Double phaverage=0D,swaverage=0D;
+		//condition for no chemical selected 
+		if(physicalhazardvalue.size()==0)
+			 return -1D;
+		
 		for(int i=0;i<physicalhazardvalue.size();i++) {
 			 phsum+=physicalhazardhmap.get(physicalhazardvalue.get(i).get(1));
 			 swsum+=signalwordmap.get(physicalhazardvalue.get(i).get(2));

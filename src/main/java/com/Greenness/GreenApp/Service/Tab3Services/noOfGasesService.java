@@ -64,6 +64,9 @@ public class noOfGasesService {
        System.out.println("nfpa health value"+nfpahealthvalue);
 		
 	Double timeandinjectionsproduct=maininstrumentservice.getProductOfTimeAndInjections();
+	//validating for no gasses situation
+	if(nfpahealthvalue.size()==0)
+		  return -1;
 	        //method call for adding volume of gas to list
 	       volumeofgaslist=step1(nfpahealthvalue, timeandinjectionsproduct);
 						       for (Double list :volumeofgaslist) {
@@ -98,6 +101,11 @@ public class noOfGasesService {
 		 Integer phsum=0;
 		Integer swsum=0;
 		Double phaverage=0D,swaverage=0D;
+		
+		if(physicalhazardvalue.size()==0) {
+		return -1D;
+		}
+		
 		for(int i=0;i<physicalhazardvalue.size();i++) {
 			 phsum+=physicalhazardhmap.get(physicalhazardvalue.get(i).get(1));
 			 swsum+=signalwordmap.get(physicalhazardvalue.get(i).get(2));
