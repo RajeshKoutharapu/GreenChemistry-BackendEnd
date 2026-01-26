@@ -17,7 +17,7 @@ public class generalInstrumentsService {
 		generalinstrumentmap.put("(-)40°C freezer", 0.40);
         generalinstrumentmap.put("Incubated and Refrigerated Benchtop Shaker", 0.47);
         generalinstrumentmap.put("Ultra-Low Freezers", 0.53);
-        generalinstrumentmap.put("Conductivity meter", 0.004);
+        generalinstrumentmap.put("Conductavity meter", 0.004);
         generalinstrumentmap.put("pH meter", 0.004);
         generalinstrumentmap.put("Autoclave", 1.29);
         generalinstrumentmap.put("Solutions Remediator", 0.21);

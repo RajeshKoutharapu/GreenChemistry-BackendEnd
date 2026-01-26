@@ -46,6 +46,8 @@ public class tab4Service {
     String samplepreperationinfo="";
     //this is used in final report and combination of wastemanagement of others and samples
     String wastemanagementforfinalreport="";
+    //variable for storing raw waste
+    Double WasteGeneratedWithoutcalc=0D;
 	
 	public tab4Service() {
 		insamplewastesamlemap.put("Off-Line", 0);
@@ -100,15 +102,21 @@ public class tab4Service {
     	wastemanagementforfinalreport=tabfourdata.getWasteManagementOthers()+" and "+tabfourdata.getWasteManagementSamples();
     	System.out.println(wastemanagementofothers+" : "+wastemanagementofsamples+" : "+numberofanalytes);
     	wastemanagementinfo=tabfourdata.getWasteInfo();
-    	//Method call for the final result in TAB2 we are using because result include (no.of analytes used ) data in tab4 
-         Result =tab2service.getEnergyConsomptionResult(numberofanalytes);
+        //checking for the size of the mainInstruments to make miniaothrization 100 if no mainInstruments selected
+    	if(maininstrumenservice.getMainInstrumentsSize()==0) {
+    		miniaothorizationresult=100D;
+    	}
+    	else {
+        	//Method call for the final result in TAB2 we are using because result include (no.of analytes used ) data in tab4 
+
+    	Result =tab2service.getEnergyConsomptionResult(numberofanalytes);
          System.out.println("Final Result of main and general instruments"+Result);
          
   	   //method call getting operation condition average and below code refer to caliculating miniaothorizationresult
   	      Double tempaverage=maininstrumenservice.getAverageOfLengthColomnSampletemeratures();
   	      miniaothorizationresult=(tempaverage+Result)/2;
   	  
-  	       
+    	}
     	
   	    //method call for  tab gases service passing no.of analytics for  caliculations
   	    tab3service.getNoofGasesServices(numberofanalytes);
@@ -145,6 +153,7 @@ public class tab4Service {
 	    	  System.out.println(" check :"+temp);
 		tempsum+=temp;
 	   }
+	     WasteGeneratedWithoutcalc= tab1service.tab1calcvalues.get("preperaionwaste")+tab2service.getEfluentWaste()+tempsum;
 	    totalwastegenerated=Math.round((tab1service.tab1calcvalues.get("preperaionwaste")+tab2service.getEfluentWaste()+tempsum)/numberofanalytes)+.0;
         if(totalwastegenerated>=250)
         	 return 0;
@@ -207,6 +216,9 @@ public class tab4Service {
     public Double getTotalWasteGenerated() {
     
     	return totalwastegenerated;
+    }
+    public Double getRawwateGenerated() {
+    	return WasteGeneratedWithoutcalc;
     }
 
 }

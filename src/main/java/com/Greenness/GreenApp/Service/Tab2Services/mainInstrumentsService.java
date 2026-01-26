@@ -16,7 +16,9 @@ public class mainInstrumentsService {
 	  Double noofinjectionandruntimefortab3=0D;
 	  //this variable is used to hold the average of main intruments conditions used to calculate miniaptherization result
 	  Double averageoflengthcolumnsampletemperatures=0D;
-	
+	  //size for validation miniotorization in tab4 
+	  Integer mainIntrumentsSize=0;
+
 	public mainInstrumentsService() {
 		maininstrumentsmap.put("UV-Vis Spectrophotometer", 0.01);
         maininstrumentsmap.put("Raman Spectrometer", 0.01);
@@ -56,11 +58,15 @@ public class mainInstrumentsService {
 	  noofinjectionandruntimefortab3=0D;
 	  averageoflengthcolumnsampletemperatures=0D;
 	  
+	  mainIntrumentsSize=maininstrumentdata.size();
+	  
 	  if(maininstrumentdata.size()>0) {
 		  for (MainInstrument mainInstrumenttemp : maininstrumentdata) {
 			  
 			  //this conditions saparate the operation condition based on give prototype
-			 if(mainInstrumenttemp.getInstrumentName().equals("HPLC") || mainInstrumenttemp.getInstrumentName().equals("UHPLC") || mainInstrumenttemp.getInstrumentName().equals("UPLC") || mainInstrumenttemp.getInstrumentName().equals("LC-MS") || mainInstrumenttemp.getInstrumentName().equals("GC") || mainInstrumenttemp.getInstrumentName().equals("GC-MS")) {
+			 if(mainInstrumenttemp.getInstrumentName().equals("HPLC") || mainInstrumenttemp.getInstrumentName().equals("UHPLC") || mainInstrumenttemp.getInstrumentName().equals("UPLC") 
+					 || mainInstrumenttemp.getInstrumentName().equals("LC-MS") || mainInstrumenttemp.getInstrumentName().equals("GC")
+					 || mainInstrumenttemp.getInstrumentName().equals("GC-MS") ||mainInstrumenttemp.getInstrumentName().equals("HPLC-Prep") ) {
 				  energy=maininstrumentsmap.get(mainInstrumenttemp.getInstrumentName());
 				  if(energy==null)
 					   energy=1.0;
@@ -113,11 +119,13 @@ public class mainInstrumentsService {
                     else
                     	manuscriptsampletemp=100;
 				  
+                    System.out.println("manuscriptcolomnlegth :"+manuscriptcolomnlegth+" manuscriptcolomntemp :"+manuscriptcolomntemp+" manuscriptsampletemp  :"+manuscriptsampletemp);
                     averageoflengthcolumnsampletemperatures+=(manuscriptcolomnlegth+manuscriptcolomntemp+manuscriptsampletemp)/3;
 				  
 			 }
 			 else if(mainInstrumenttemp.getInstrumentName().equals("GC") || mainInstrumenttemp.getInstrumentName().equals("GC-MS")||
-					 mainInstrumenttemp.getInstrumentName().equals("Single Quadrupole GC-MS") || mainInstrumenttemp.getInstrumentName().equals("Triple Quadrupole GC/MS")) {
+					 mainInstrumenttemp.getInstrumentName().equals("Single Quadrupole GC-MS") || mainInstrumenttemp.getInstrumentName().equals("Triple Quadrupole GC/MS")
+					 ||  mainInstrumenttemp.getInstrumentName().equals("Triple Quadrupole LC/MS system")) {
 				 
 				 energy=maininstrumentsmap.get(mainInstrumenttemp.getInstrumentName());
 				  if(energy==null)
@@ -173,6 +181,9 @@ public class mainInstrumentsService {
                    else
                 	   manuscriptsampletemp=25;
 				  
+                   
+                   System.out.println("manuscriptcolomnlegth :"+manuscriptcolomnlegth+" manuscriptcolomntemp :"+manuscriptcolomntemp+" manuscriptsampletemp  :"+manuscriptsampletemp);
+
                    averageoflengthcolumnsampletemperatures+=(manuscriptcolomnlegth+manuscriptcolomntemp+manuscriptsampletemp)/3;
 				 
 			 }
@@ -207,9 +218,11 @@ public class mainInstrumentsService {
 			 }
 		}
 	  }
+	  
 	 
 	return energysum;
   }
+  
   
   
   //Method to find efluentWaste 
@@ -241,6 +254,9 @@ public class mainInstrumentsService {
 	  return effuentproduct+dissolution;
   }
   
+  public Integer getMainInstrumentsSize() {
+	  return mainIntrumentsSize;
+  }
   // Method for product of runtime and no.of injection for tab 3to caliculate Step 1 
   public Double getProductOfTimeAndInjections() {
 	  return noofinjectionandruntimefortab3;
@@ -250,4 +266,6 @@ public class mainInstrumentsService {
   public Double getAverageOfLengthColomnSampletemeratures() {
 	  return averageoflengthcolumnsampletemperatures;
   }
+  
+ 
 }

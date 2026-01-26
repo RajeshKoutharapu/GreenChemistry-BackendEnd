@@ -21,8 +21,16 @@ public class tab2Service {
 	 //below both are used used in final report generation
 	 Integer numberofgeneralimstruments=0;
 	 Integer numberofmaininstruments=0;
+	 
+	 //variable for rawenegryconsumptio for the result tab
+	 Double rawEnegryConsumtion=0D;
 
+	 //this variable store the tab2 data and used at finel page to pass the intruments names to result
+	 tabTwoDataClass tab2data;
 	public void tab2DateService(tabTwoDataClass tab2dataclass) {
+		
+		//assigning tab2data to use to pass names to result
+		tab2data=tab2dataclass;
 		//method call for generalinstrument total energy
 		 generalinstrumentsenergy=generalinstrumentsservice.generalInstrumentenEnergy(tab2dataclass.getGeneralInstruments());
 		 numberofgeneralimstruments=tab2dataclass.getGeneralInstruments().size();
@@ -41,7 +49,13 @@ public class tab2Service {
 	//Method for caliculating energy consumption result and  returning final result based on pint number 8 in word document
 	public Integer getEnergyConsomptionResult(Integer noofanalytics) {
 		
-      energyconsumptionfinalresult =Math.round((generalinstrumentsenergy+maininstrumentsenergy)/noofanalytics*10.0)/ 10.0;
+		
+		System.out.println("general intrumentenergy"+generalinstrumentsenergy+"  maininstrumentEnergy "+maininstrumentsenergy);
+		
+		
+		rawEnegryConsumtion=Math.round((generalinstrumentsenergy+maininstrumentsenergy)*10.10)/10.0;
+      System.out.println("raw :"+rawEnegryConsumtion);
+		energyconsumptionfinalresult =Math.round((generalinstrumentsenergy+maininstrumentsenergy)/noofanalytics*10.0)/ 10.0;
       
 	  System.out.println("Energy consumption  final result :"+energyconsumptionfinalresult);
 	  if(energyconsumptionfinalresult>=2.5)
@@ -77,6 +91,12 @@ public class tab2Service {
 		return numberofmaininstruments;
 	}
 	
+	public Double getRawEnergy() {
+		return rawEnegryConsumtion;
+	}
 	
+	public tabTwoDataClass getTab2Data() {
+		return tab2data;
+	}
 	
 }

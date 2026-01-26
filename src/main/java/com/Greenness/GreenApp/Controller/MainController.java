@@ -25,8 +25,8 @@ import com.Greenness.GreenApp.model.tabTwoDataClass;
 
 @RestController
 @RequestMapping("/api")
-//@CrossOrigin(origins = "https://greetiam.netlify.app")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://greetiam.netlify.app")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class MainController {
 	
 	@Autowired

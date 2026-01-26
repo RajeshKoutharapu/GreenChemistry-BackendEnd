@@ -76,12 +76,12 @@ public class noOfGasesService {
 	       totalwaste=getTotalWaste(volumeofgaslist ,noofanayticsstyied);
 	                System.out.println("total waste "+totalwaste);
 	       //method call to find percentage of gases used (step2)
-	       gasedusedlist=step2(volumeofgaslist,totalwaste);
+	     //  gasedusedlist=step2(volumeofgaslist,totalwaste);
 					//	       for (Double list : gasedusedlist) {
 					//				System.out.println(list);
 					//			}
 	   	//this  method  call used to get nfpahealthvalue based on the dropdown selected and formula
-           nfpahealthvaluelist=getnfpaHealthValue(gasedusedlist, nfpahealthvalue);
+           nfpahealthvaluelist=getnfpaHealthValue(nfpahealthvalue);
 					//           for (Double list :  nfpahealthvaluelist) {
 					//				System.out.println(list);
 					//			}
@@ -151,24 +151,24 @@ public class noOfGasesService {
 		return finalwaste;
 		
 	}
-	public List<Double> step2(List<Double> gasvolumelist,Double totalwaste){
-		List<Double> temp=new ArrayList<>();
-		
-		for (Double gaslist : gasvolumelist) {
-			temp.add((gaslist*100)/totalwaste);
-		}
-		
-		System.out.println("step 2 result"+Arrays.toString(temp.toArray()));
-		return temp;
-	}
+//	public List<Double> step2(List<Double> gasvolumelist,Double totalwaste){
+//		List<Double> temp=new ArrayList<>();
+//		
+//		for (Double gaslist : gasvolumelist) {
+//			temp.add((gaslist*100)/totalwaste);
+//		}
+//		
+//		System.out.println("step 2 result"+Arrays.toString(temp.toArray()));
+//		return temp;
+//	}
 	
 	//method used to claiculate nfpahealthvalue based on the dropdown selected and formula
-	public List<Double> getnfpaHealthValue(List<Double> gasused,List<List<String>> nfpahealthvalue){
+	public List<Double> getnfpaHealthValue(List<List<String>> nfpahealthvalue){
 		List<Double> temp=new ArrayList<>();
           
 		int  index=0;
 		for(int i=0;i<nfpahealthvalue.size();i++) {
-			temp.add((gasused.get(index)*nfpahealtflemabilityhmap.get(nfpahealthvalue.get(i).get(1)))/100);
+			temp.add((double) (nfpahealtflemabilityhmap.get(nfpahealthvalue.get(i).get(1))));
 			index++;
 		}
 		

@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Greenness.GreenApp.Service.preReportResultsService;
+import com.Greenness.GreenApp.model.NumberOfChemicals;
 import com.Greenness.GreenApp.Service.Tab2Services.mainInstrumentsService;
 import com.Greenness.GreenApp.model.tabThreeDataClass;
 
 @Service
 public class tab3Service {
+
+    private final NumberOfChemicals numberOfChemicals;
 	@Autowired
 	noOfChemicalServices chemicalservices;
 	@Autowired
@@ -31,11 +34,18 @@ public class tab3Service {
 	
 	tabThreeDataClass  tabthreedataforgasesclac;
 	
+	tabThreeDataClass tab3data;
+	
 	//this list of step1 values of nfpsHealthValue used in finding total waste generated field used to caliculate final waste result on prefinalReport
 	List<Double> step1nfpahealthvaluelist=new  ArrayList<>();
+
+    tab3Service(NumberOfChemicals numberOfChemicals) {
+        this.numberOfChemicals = numberOfChemicals;
+    }
 	
 	public void getTab3Services(tabThreeDataClass tabthreedata) {
-		
+		//this for passing the names of gases and chemical in result
+		tab3data=tabthreedata;
 		tabthreedataforgasesclac=tabthreedata;
 		chemicalnfpahealthaverage=chemicalservices.getChemicalNfpaHeathAverage(tabthreedata.getNumberOfChemicals().getNfpaHealthValue());
 		System.out.println("chemicalhealth average :"+chemicalnfpahealthaverage);
@@ -98,6 +108,8 @@ public class tab3Service {
 		return step1nfpahealthvaluelist;
 	}
 	
-	
+	public tabThreeDataClass getThabThreeData() {
+		return tab3data;
+	}
 	
 }
