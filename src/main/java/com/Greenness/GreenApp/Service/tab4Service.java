@@ -54,6 +54,7 @@ public class tab4Service {
 		insamplewastesamlemap.put("At-Line", 33);
 		insamplewastesamlemap.put("On-Line", 66);
 		insamplewastesamlemap.put("In-Line", 100);
+		insamplewastesamlemap.put("None",100);
 		insamplewastesamlemap.put("Case-1", 100);
 		insamplewastesamlemap.put("Case-2", 75);
 		insamplewastesamlemap.put("Case-3", 50);
@@ -132,8 +133,8 @@ public class tab4Service {
      	//method cal to preReport class for setting derevation
   	    prereportresultservice.setDerivation(derivation);
   	    
-  	    prereportresultservice.setEnergyConsumptionFinalResult(Result);
-  	    
+  	    prereportresultservice.setEnergyConsumptionFinalResult(tab2service.getEnergyConsomptionResult(numberofanalytes));
+  	    System.out.println("Checking final reselt "+tab2service.getEnergyConsomptionResult(numberofanalytes));
   	    //method call to set miniaothorization in preresultreportclass
   	    prereportresultservice.setminiaotherizationresult(miniaothorizationresult);
   	    

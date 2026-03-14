@@ -66,6 +66,9 @@ public class tab2Service {
 		   return 50;
 	  else if(energyconsumptionfinalresult>=1.0)
 		  return 75;
+	  else if(energyconsumptionfinalresult>=0.5)
+		  return 75;
+	 // else if(energyconsumptionfinalresult<=0.49)
 	  else
 		  return 100;
 	  

@@ -66,7 +66,7 @@ public class preReportResultsService {
 		
 		
 		if(gflemmabilityavg!=-1 && chealthavg!=-1){
-			hazarduschemicalresult=Math.round( (ghealthavg+gflemmabilityavg+chealthavg+cflemmabilityavg)/4);
+			hazarduschemicalresult=Math.round( ((chealthavg+cflemmabilityavg)/2-((ghealthavg+gflemmabilityavg)/2)/((chealthavg+cflemmabilityavg)/2)));
 			  System.out.println("hazarduschemicalresult :"+hazarduschemicalresult);
 		}
 		else if(gflemmabilityavg==-1 && chealthavg!=-1) {
